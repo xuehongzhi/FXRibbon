@@ -32,13 +32,14 @@ import com.pixelduke.control.ribbon.RibbonTab;
 import impl.com.pixelduke.skin.RibbonSkin;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
+import com.pixelduke.events.RibbonTabClickEvent;
+import javafx.beans.property.ObjectProperty;
+import javafx.scene.input.MouseEvent;
 
-import java.util.Collection;
-import java.util.HashMap;
 
 public class Ribbon extends Control{
     private final static String DEFAULT_STYLE_CLASS = "ribbon";
@@ -46,15 +47,47 @@ public class Ribbon extends Control{
     private final ObservableList<RibbonTab> tabs;
 
     private QuickAccessBar quickAccessBar;
-
+   
     public Ribbon()
     {
+       
         quickAccessBar = new QuickAccessBar();
 
         tabs = FXCollections.observableArrayList();
-
+        
         getStyleClass().setAll(DEFAULT_STYLE_CLASS);
+        
+       
+    } 
+
+    private final ObjectProperty<EventHandler<RibbonTabClickEvent>> propertyonTabClick = new SimpleObjectProperty<>();
+
+    public final ObjectProperty<EventHandler<RibbonTabClickEvent>> onTabClickProperty() {
+        return propertyonTabClick;
     }
+
+    public final EventHandler<RibbonTabClickEvent> getOnTabClick() {
+        return propertyonTabClick.get();
+    }
+    
+        public final void setOnTabClick(EventHandler< RibbonTabClickEvent > handler) {
+        propertyonTabClick.set(handler);
+    }
+        
+   private final ObjectProperty<EventHandler<MouseEvent>> propertyonTabPaneExited = new SimpleObjectProperty<>();
+
+    public final ObjectProperty<EventHandler<MouseEvent>> onTabPaneExitedProperty() {
+        return propertyonTabPaneExited;
+    }
+
+    public final EventHandler<MouseEvent> getOnTabPaneExited() {
+        return propertyonTabPaneExited.get();
+    }
+    public final void setOnTabPaneExited(EventHandler< MouseEvent > handler) {
+        propertyonTabPaneExited.set(handler);
+    }
+
+
 
     public ObservableList<RibbonTab> getTabs(){
         return tabs;
@@ -78,6 +111,11 @@ public class Ribbon extends Control{
     {
         return selectedRibbonTab.get();
     }
+    
+    public void setSelectTab(int index){
+        setSelectedRibbonTab(tabs.get(index));
+    }
+    
     public void setSelectedRibbonTab(RibbonTab ribbonTab)
     {
         selectedRibbonTab.set(ribbonTab);
