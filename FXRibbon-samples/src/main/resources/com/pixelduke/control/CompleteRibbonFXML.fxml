@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import com.pixelduke.control.*?>
+<?import com.pixelduke.control.ribbon.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -40,59 +44,86 @@
   -->
 
 <?import com.pixelduke.control.ribbon.QuickAccessBar?>
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="410.0" xmlns:fx="http://javafx.com/fxml">
+
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="410.0" stylesheets="@ribbon_sample.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <top>
-        <Ribbon>
+        <Ribbon prefHeight="194.0" prefWidth="410.0" stylesheets="@ribbon_sample.css">
             <quickAccessBar>
                 <QuickAccessBar>
                     <buttons>
                         <Button>
                             <graphic>
                                 <ImageView>
-                                    <Image url="@icons8_Save_16px.png" />
+                                   <image>
+                                       <Image url="@icons8_Save_16px.png" />
+                                   </image>
                                 </ImageView>
                             </graphic>
                         </Button>
                         <Button>
                             <graphic>
                                 <ImageView>
-                                    <Image url="@icons8_Undo_16px.png" />
+                                   <image>
+                                       <Image url="@icons8_Undo_16px.png" />
+                                   </image>
                                 </ImageView>
                             </graphic>
                         </Button>
                         <Button>
                             <graphic>
                                 <ImageView>
-                                    <Image url="@icons8_Redo_16px.png" />
+                                   <image>
+                                       <Image url="@icons8_Redo_16px.png" />
+                                   </image>
                                 </ImageView>
                             </graphic>
                         </Button>
                     </buttons>
+
+		    <rightButtons>
+		    <Button>
+                            <graphic>
+                                <ImageView>
+                                   <image>
+                                       <Image url="@icons8_Redo_16px.png" />
+                                   </image>
+                                </ImageView>
+                            </graphic>
+                    
+		    </Button>
+		    </rightButtons>
+					  
                 </QuickAccessBar>
             </quickAccessBar>
             <tabs>
-                <RibbonTab text="Home">
+                <RibbonTab id="TaskGroups" text="Home">
                     <ribbonGroups>
-                        <RibbonGroup title="File">
+                        <RibbonGroup minWidth="-Infinity" title="File">
                             <nodes>
-                                <Button contentDisplay="TOP" text="Open" wrapText="true" styleClass="big">
+                                <Button contentDisplay="TOP" styleClass="big" text="Open" wrapText="true">
                                     <graphic>
                                         <ImageView>
-                                            <Image url="@icons8_Open_32px_3.png" />
+                                           <image>
+                                               <Image url="@icons8_Open_32px_3.png" />
+                                           </image>
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button contentDisplay="TOP" text="New" wrapText="true" styleClass="big">
+                                <Button contentDisplay="TOP" styleClass="big" text="New" wrapText="true">
                                     <graphic>
                                         <ImageView>
-                                            <Image url="@icons8_File_32px_1.png" />
+                                           <image>
+                                               <Image url="@icons8_File_32px_1.png" />
+                                           </image>
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button contentDisplay="TOP" text="Save" wrapText="true" styleClass="big">
+                                <Button contentDisplay="TOP" styleClass="big" text="Save" wrapText="true">
                                     <graphic>
                                         <ImageView>
-                                            <Image url="@icons8_Save_32px.png" />
+                                           <image>
+                                               <Image url="@icons8_Save_32px.png" />
+                                           </image>
                                         </ImageView>
                                     </graphic>
                                 </Button>
@@ -105,114 +136,132 @@
                                 </Button>-->
                             </nodes>
                         </RibbonGroup>
-                        <RibbonGroup title="Preferences">
+                        <RibbonGroup prefHeight="3.0" prefWidth="589.0" title="Preferences">
                             <nodes>
                                 <Column>
-                                    <RibbonItem label="Theme:">
-                                        <graphic>
-                                            <ImageView>
-                                                <Image url="@icons8_Change_Theme_16px.png" />
-                                            </ImageView>
-                                        </graphic>
-                                        <item>
-                                            <ComboBox>
-                                                <items>
-                                                    <FXCollections fx:factory="observableArrayList">
-                                                        <String fx:value="Office Silver 2007" />
-                                                        <String fx:value="Office Blue 2007" />
-                                                        <String fx:value="Nebula Brick Wall" />
-                                                        <String fx:value="Business Blue Steel" />
-                                                    </FXCollections>
-                                                </items>
-                                                <value>
-                                                    <String fx:value="Office Silver 2007" />
-                                                </value>
-                                            </ComboBox>
-                                        </item>
-                                    </RibbonItem>
-
-                                    <RibbonItem label="Language:">
-                                        <graphic>
-                                            <ImageView>
-                                                <Image url="@icons8_Location_16px.png" />
-                                            </ImageView>
-                                        </graphic>
-                                        <item>
-                                            <ComboBox>
-                                                <items>
-                                                    <FXCollections fx:factory="observableArrayList">
-                                                        <String fx:value="English (UK)" />
-                                                        <String fx:value="Portugues (PT)" />
-                                                        <String fx:value="Portugues (BR)" />
-                                                        <String fx:value="English (USA)" />
-                                                    </FXCollections>
-                                                </items>
-                                                <value>
-                                                    <String fx:value="English (UK)" />
-                                                </value>
-                                            </ComboBox>
-                                        </item>
-                                    </RibbonItem>
+                                   <children>
+                                       <RibbonItem label="Theme:">
+                                           <graphic>
+                                               <ImageView>
+                                                  <image>
+                                                      <Image url="@icons8_Change_Theme_16px.png" />
+                                                  </image>
+                                               </ImageView>
+                                           </graphic>
+                                           <item>
+                                               <ComboBox>
+                                                   <items>
+                                                       <FXCollections fx:factory="observableArrayList">
+                                                           <String fx:value="Office Silver 2007" />
+                                                           <String fx:value="Office Blue 2007" />
+                                                           <String fx:value="Nebula Brick Wall" />
+                                                           <String fx:value="Business Blue Steel" />
+                                                       </FXCollections>
+                                                   </items>
+                                                   <value>
+                                                       <String fx:value="Office Silver 2007" />
+                                                   </value>
+                                               </ComboBox>
+                                           </item>
+                                       </RibbonItem>
+   
+                                       <RibbonItem label="Language:">
+                                           <graphic>
+                                               <ImageView>
+                                                  <image>
+                                                      <Image url="@icons8_Location_16px.png" />
+                                                  </image>
+                                               </ImageView>
+                                           </graphic>
+                                           <item>
+                                               <ComboBox>
+                                                   <items>
+                                                       <FXCollections fx:factory="observableArrayList">
+                                                           <String fx:value="English (UK)" />
+                                                           <String fx:value="Portugues (PT)" />
+                                                           <String fx:value="Portugues (BR)" />
+                                                           <String fx:value="English (USA)" />
+                                                       </FXCollections>
+                                                   </items>
+                                                   <value>
+                                                       <String fx:value="English (UK)" />
+                                                   </value>
+                                               </ComboBox>
+                                           </item>
+                                       </RibbonItem>
+                                   </children>
                                 </Column>
                                 <Column>
-                                    <RibbonItem label="Angles:">
-                                        <item>
-                                            <ComboBox>
-                                                <items>
-                                                    <FXCollections fx:factory="observableArrayList">
-                                                        <String fx:value="Radians" />
-                                                        <String fx:value="Degrees" />
-                                                    </FXCollections>
-                                                </items>
-                                                <value>
-                                                    <String fx:value="Radians" />
-                                                </value>
-                                            </ComboBox>
-                                        </item>
-                                    </RibbonItem>
-                                    <RibbonItem label="Decimal Places:">
-                                        <item>
-                                            <TextField text="2" prefWidth="60" > </TextField>
-                                        </item>
-                                    </RibbonItem>
-                                    <RibbonItem label="Exponential Threshold:" >
-                                        <item>
-                                                <TextField text="3" prefWidth="60"> </TextField>
-                                        </item>
-                                    </RibbonItem>
+                                   <children>
+                                       <RibbonItem label="Angles:">
+                                           <item>
+                                               <ComboBox>
+                                                   <items>
+                                                       <FXCollections fx:factory="observableArrayList">
+                                                           <String fx:value="Radians" />
+                                                           <String fx:value="Degrees" />
+                                                       </FXCollections>
+                                                   </items>
+                                                   <value>
+                                                       <String fx:value="Radians" />
+                                                   </value>
+                                               </ComboBox>
+                                           </item>
+                                       </RibbonItem>
+                                       <RibbonItem label="Decimal Places:">
+                                           <item>
+                                               <TextField prefWidth="60" text="2"> </TextField>
+                                           </item>
+                                       </RibbonItem>
+                                       <RibbonItem label="Exponential Threshold:">
+                                           <item>
+                                                   <TextField prefWidth="60" text="3"> </TextField>
+                                           </item>
+                                       </RibbonItem>
+                                   </children>
                                 </Column>
 
                                 <Column>
-                                    <ToggleButton text="locked" styleClass="normal" minWidth="-Infinity">
-                                        <graphic>
-                                            <ImageView>
-                                                <Image url="@icons8_Lock_16px.png"/>
-                                            </ImageView>
-                                        </graphic>
-                                    </ToggleButton>
+   <children>
+                                       <ToggleButton minWidth="-Infinity" styleClass="normal" text="locked">
+                                           <graphic>
+                                               <ImageView>
+                                                  <image>
+                                                      <Image url="@icons8_Lock_16px.png" />
+                                                  </image>
+                                               </ImageView>
+                                           </graphic>
+                                       </ToggleButton>
+   </children>
                                 </Column>
                             </nodes>
                         </RibbonGroup>
                         <RibbonGroup title="Help">
                             <nodes>
-                                <Button contentDisplay="TOP" text="Web" wrapText="true" styleClass="big">
+                                <Button contentDisplay="TOP" styleClass="big" text="Web" wrapText="true">
                                     <graphic>
                                         <ImageView>
-                                            <Image url="@icons8_Globe_32px.png" />
+                                           <image>
+                                               <Image url="@icons8_Globe_32px.png" />
+                                           </image>
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button contentDisplay="TOP" text="About" wrapText="true" styleClass="big">
+                                <Button contentDisplay="TOP" styleClass="big" text="About" wrapText="true">
                                     <graphic>
                                         <ImageView>
-                                            <Image url="@icons8_Info_32px.png" />
+                                           <image>
+                                               <Image url="@icons8_Info_32px.png" />
+                                           </image>
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button contentDisplay="TOP" text="Help" wrapText="true" styleClass="big">
+                                <Button contentDisplay="TOP" styleClass="big" text="Help" wrapText="true">
                                     <graphic>
                                         <ImageView>
-                                            <Image url="@icons8_Help_32px.png" />
+                                           <image>
+                                               <Image url="@icons8_Help_32px.png" />
+                                           </image>
                                         </ImageView>
                                     </graphic>
                                 </Button>
@@ -232,9 +281,11 @@
                 </RibbonTab>
                 <RibbonTab text="Notes">
                 </RibbonTab>
+		 
                 <!--<RibbonTab text="SERIES" contextualColor="blue">-->
                 <!--</RibbonTab>-->
             </tabs>
+	    
         </Ribbon>
 
     </top>

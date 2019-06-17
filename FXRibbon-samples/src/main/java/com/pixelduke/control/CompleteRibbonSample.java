@@ -47,6 +47,7 @@ public class CompleteRibbonSample extends Application {
         Parent root = FXMLLoader.load(resource);
         Scene scene = new Scene(root);
 
+
 //        ScenicView.show(scene);
         new JMetro(JMetro.Style.LIGHT).applyTheme(scene);
 

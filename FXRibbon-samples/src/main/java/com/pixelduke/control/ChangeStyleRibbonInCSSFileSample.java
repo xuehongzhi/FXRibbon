@@ -20,6 +20,8 @@ public class ChangeStyleRibbonInCSSFileSample extends Application {
         Parent root = FXMLLoader.load(resource);
 
         Scene scene = new Scene(root);
+        
+        scene.lookup("#TaskGroups").setManaged(false);
 
 //        ScenicView.show(scene);
         new JMetro(JMetro.Style.LIGHT).applyTheme(scene);
