@@ -35,6 +35,9 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 
 import java.util.Collection;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import com.pixelduke.events.RibbonTabClickEvent;
 
 public class RibbonSkin extends SkinBase<Ribbon> {
     private final VBox outerContainer;
@@ -59,6 +62,26 @@ public class RibbonSkin extends SkinBase<Ribbon> {
 
         control.selectedRibbonTabProperty().addListener((observable, oldValue, newValue) -> tabPane.getSelectionModel().select((RibbonTab)newValue));
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> control.setSelectedRibbonTab((RibbonTab)tabPane.getSelectionModel().getSelectedItem()));
+        tabPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                EventHandler<RibbonTabClickEvent>  handler = control.getOnTabClick();
+                if(handler != null) {
+                    handler.handle(new RibbonTabClickEvent(tabPane.getSelectionModel().getSelectedIndex()));
+                }
+            }
+        });
+        
+        tabPane.setOnMouseExited(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                EventHandler<MouseEvent>  handler = control.getOnTabPaneExited();
+                if(handler != null) {
+                    handler.handle(event);
+                }
+            }
+        });
+    
     }
 
     private void updateAddedRibbonTabs(Collection<? extends RibbonTab> ribbonTabs) {

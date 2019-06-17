@@ -56,9 +56,10 @@ public class RibbonTab extends Tab {
 
     private void init() {
         content = new HBox();
+        
 //        content.setMinHeight(CONTENT_HEIGHT);
         this.setContent(content);
-
+       
         setClosable(false);
 
         ribbonGroups.addListener(this::groupsChanged);
