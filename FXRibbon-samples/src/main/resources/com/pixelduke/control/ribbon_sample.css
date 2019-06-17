@@ -1,3 +1,18 @@
 .ribbon {
     ACCENT_COLOR: #10893e;
 }
+
+
+.ribbon-tab {
+   -fx-max-height : 0px;
+}
+
+.ribbon > .outer-container > .tab-pane > .tab-header-area > .headers-region > .tab#TaskGroups  {
+    -fx-background-color: transparent, transparent, #4286f4 ;
+    }
+
+.ribbon > .outer-container > .tab-pane > .tab-header-area > .headers-region > .tab#TaskGroups >.tab-container > .tab-label {
+
+     -fx-text-fill: white !important;
+}
+
