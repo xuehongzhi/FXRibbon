@@ -29,18 +29,21 @@ package impl.com.pixelduke.skin;
 
 import com.pixelduke.control.Ribbon;
 import com.pixelduke.control.ribbon.RibbonTab;
+import com.pixelduke.events.RibbonTabClickEvent;
 import javafx.collections.ListChangeListener;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.control.SkinBase;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+
 
 import java.util.Collection;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
-import com.pixelduke.events.RibbonTabClickEvent;
 
 public class RibbonSkin extends SkinBase<Ribbon> {
-    private final VBox outerContainer;
+
+    private final AnchorPane outerContainer;
     private final TabPane tabPane;
 
     /**
@@ -51,27 +54,36 @@ public class RibbonSkin extends SkinBase<Ribbon> {
     public RibbonSkin(Ribbon control) {
         super(control);
         tabPane = new TabPane();
-        outerContainer = new VBox();
+        //outerContainer = new VBox();
+        outerContainer = new AnchorPane();
+
+        final Button addButton = new Button("Btn1");
+        addButton.setPrefWidth(40);
+        addButton.setPrefHeight(15);
+
+        AnchorPane.setTopAnchor(tabPane, .0);
+        AnchorPane.setLeftAnchor(tabPane, 5.0);
+        AnchorPane.setRightAnchor(tabPane, 5.0);
+        AnchorPane.setTopAnchor(addButton, 5.0);
+        AnchorPane.setRightAnchor(addButton, 10.0);
+
 
         control.getTabs().addListener(this::tabsChanged);
         updateAddedRibbonTabs(control.getTabs());
 
         outerContainer.getStyleClass().setAll("outer-container");
-        outerContainer.getChildren().addAll(control.getQuickAccessBar(), tabPane);
+        outerContainer.getChildren().addAll( tabPane, addButton);
         getChildren().add(outerContainer);
 
         control.selectedRibbonTabProperty().addListener((observable, oldValue, newValue) -> tabPane.getSelectionModel().select((RibbonTab)newValue));
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> control.setSelectedRibbonTab((RibbonTab)tabPane.getSelectionModel().getSelectedItem()));
-        tabPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                EventHandler<RibbonTabClickEvent>  handler = control.getOnTabClick();
-                if(handler != null) {
-                    handler.handle(new RibbonTabClickEvent(tabPane.getSelectionModel().getSelectedIndex()));
-                }
+        tabPane.setOnMouseClicked(event -> {
+            EventHandler<RibbonTabClickEvent>  handler = control.getOnTabClick();
+            if(handler != null) {
+                handler.handle(new RibbonTabClickEvent(tabPane.getSelectionModel().getSelectedIndex()));
             }
         });
-        
+
         tabPane.setOnMouseExited(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
@@ -81,7 +93,7 @@ public class RibbonSkin extends SkinBase<Ribbon> {
                 }
             }
         });
-    
+
     }
 
     private void updateAddedRibbonTabs(Collection<? extends RibbonTab> ribbonTabs) {
